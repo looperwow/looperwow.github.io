@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+<style type="text/css">
+</style>
+<body>
+<canvas id="myCanvas" width="400" height="400">您的浏览器不支持canvas标签</canvas>
+<audio id="myAudio" src="222.mp3" controls="controls">您的浏览器不支持audio标签</audio>
+</body>
+<script type="text/javascript">
+window.onload = function () {
+       
+           try {
+  var audioCtx = new (window.AudioContext ||window.webkitAudioContext)();
+} catch (err) {
+  alert('!Your browser does not support Web Audio API!');
+};
+       
+
+              var myCanvas = document.getElementById('myCanvas'),
+                 canvasCtx = myCanvas.getContext("2d"),
+                myAudio = document.getElementById("myAudio"),
+                source = audioCtx.createMediaElementSource(myAudio),
+
+                analyser = audioCtx.createAnalyser();
+
+           source.connect(analyser);
+            analyser.connect(audioCtx.destination);
+            myAudio.oncanplaythrough = function draw () {
+                 var cwidth = myCanvas.width,
+                     cheight = myCanvas.height,
+                     array = new Uint8Array(128);
+              analyser.getByteFrequencyData(array);
+               canvasCtx.clearRect(0, 0, cwidth, cheight);
+                 for (var i = 0; i < array.length; i++) {
+                   canvasCtx.fillRect(i * 3, cheight - array[i], 2, cheight);
+               }
+               requestAnimationFrame(draw);
+            };
+         };
+
+for (var i = 0; i < 5; i++) {
+  
+  (function(i) {
+    console.time('q');
+    setTimeout(function() {
+      console.log(i);
+    }, i * 1000);
+    console.timeEnd('q');
+  })(i);
+  
+}
+</script>
+</html>
+
+
