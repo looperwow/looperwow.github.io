@@ -35,7 +35,7 @@
 	var t1=b1*Math.pow(h1,3)/3;
 	var t2=(b1/3-2*b2*h1/3/h2)*(Math.pow(h1+h2,3)-Math.pow(h1,3))+b2/2/h2*(Math.pow(h1+h2,4)-Math.pow(h1,4));
 	var t3=((b1+2*b2)/3)*(Math.pow(h1+h2+h3,3)-Math.pow(h1+h2,3));
-	var iner=4*(t1+t2+t3);
+	var iner=2*(t1+t2+t3);
 	var iner=Number(iner/Math.pow(10,9));
 	var iner=iner.toFixed(2);
 	var n1=150*Math.pow(275,3)/3;
