@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>deng</title>
+</head>
+<style type="text/css">
+	input{
+		width: 80%;
+	}
+	#suiyi{
+		color: red;
+		font-size: 20px;
+	}
+</style>
+<body>
+	<div id="suiyi">画等势线图简易实现说明：1.把最小数据输在第一个框里（最小数据和最大数据之差不要大于255，否则颜色不够用），其余的按照5列输入,记得要用英文下逗号分隔，否则无法识别。</div>
+	请输入数据最小值<input type="number" name="" id="min" value="110"><br>
+	请输入第一组数据<input type="text" name="" id="fir" value="273,265,272,249,260,276,296,312,338,360,322,299,282,266,286,259,250,244,241,249,240,195,212,182,159,180,110,115,132"><br>
+	请输入第二组数据<input type="text" name="" id="sec" value="311,310,303,278,275,279,275,317,318,345,313,311,296,294,276,256,269,249,269,249,230,191,233,188,212,182,141,148,163"><br>
+	请输入第三组数据<input type="text" name="" id="thr" value="311,310,282,282,262,268,306,313,306,322,313,320,285,297,285,285,279,289,293,250,259,236,234,197,190,252,179,169,186"><br>
+	请输入第四组数据<input type="text" name="" id="fou" value="290,303,309,309,259,285,310,315,298,300,312,311,297,292,277,276,280,320,319,286,276,276,277,195,243,240,175,179,214"><br>
+	请输入第五组数据<input type="text" name="" id="fiv" value="278,298,309,297,281,278,307,306,305,265,291,274,313,285,261,270,259,288,292,309,301,306,282,208,276,250,110,183,239"><br>
+	<input type="submit" name="开始绘图" value="开始绘图吧！" onclick="go()">
+	<canvas id=myCanvas>ee</canvas>
+
+</body>
+<script type="text/javascript">
+
+	//思路是绘制一个29*5的矩阵，线性差值的方法，扩展为290*50的矩阵，然后根据每个点的数值大小上色，就这样。
+
+	var deng =document.getElementById('myCanvas');
+	var ctx=deng.getContext('2d');
+	deng.width = 2500;
+	deng.height = 800;
+	
+	var x,y,z,h=5,d=10;
+	var Color=new Array();
+	var Arr1=new Array();
+	var Arr2=new Array();
+	var Arr3=new Array();
+	var Arr4=new Array();
+	var Arr5=new Array();
+
+	var Arr10=new Array();
+	var Arr20=new Array();
+	var Arr30=new Array();
+	var Arr40=new Array();
+	var Arr50=new Array();
+	// var Arr10=new Array(273,265,272,249,260,276,296,312,338,360,322,299,282,266,286,259,250,244,241,249,240,195,212,182,159,180,110,115,132);
+	// var Arr20=new Array(311,310,303,278,275,279,275,317,318,345,313,311,296,294,276,256,269,249,269,249,230,191,233,188,212,182,141,148,163);
+	// var Arr30=new Array(311,310,282,282,262,268,306,313,306,322,313,320,285,297,285,285,279,289,293,250,259,236,234,197,190,252,179,169,186);
+	// var Arr40=new Array(290,303,309,309,259,285,310,315,298,300,312,311,297,292,277,276,280,320,319,286,276,276,277,195,243,240,175,179,214);
+	// var Arr50=new Array(278,298,309,297,281,278,307,306,305,265,291,274,313,285,261,270,259,288,292,309,301,306,282,208,276,250,110,183,239);
+	var Arr=new Array();
+	var min=document.getElementById('min').value;
+
+	//var Arr0[0]=new Array();
+	var Arr0=[];
+	Arr0[0]=new Array();
+	Arr0[1]=new Array();
+	Arr0[2]=new Array();
+	Arr0[3]=new Array();
+	Arr0[4]=new Array();
+	var c;
+
+	function go(){
+
+		var fir=document.getElementById('fir').value;
+		//console.log(fir);
+		Arr10=fir.split(',').map(Number);
+		//console.log(Arr10);
+		var sec=document.getElementById('sec').value;
+		Arr20=sec.split(',').map(Number);
+		var thr=document.getElementById('thr').value;
+		Arr30=thr.split(',').map(Number);
+		var fou=document.getElementById('fou').value;
+		Arr40=fou.split(',').map(Number);
+		var fiv=document.getElementById('fiv').value;
+		Arr50=fiv.split(',').map(Number);
+
+	Arr[0]=Arr10;
+	Arr[1]=Arr20;
+	Arr[2]=Arr30;
+	Arr[3]=Arr40;
+	Arr[4]=Arr50;
+
+	//console.log(Arr);
+
+		for (var i = 0; i < 4*d; i++) {
+			Arr00[i]=new Array();
+		}
+	//console.log(Arr,Arr.length);
+
+	for (var j = 0; j < 28; j++) {
+		for (var i = 0; i < d; i++) {
+		var z=Arr[0][j]+(Arr[0][j+1]-Arr[0][j])/d*i;
+		//console.log(j*d+i);
+		//console.log(z);
+		Arr0[0][j*d+i]=parseInt(z);	
+		//console.log(Arr0[0][j*d+i]);
+		}
+	}
+	//console.log(Arr0[0]);
+
+		for (var j = 0; j < 28; j++) {
+		for (var i = 0; i < d; i++) {
+		var z=Arr[1][j]+(Arr[1][j+1]-Arr[1][j])/d*i;
+		//console.log(j*d+i);
+		Arr0[1][j*d+i]=parseInt(z);	
+		//console.log(Arr0[i]);
+		}
+	}
+
+		for (var j = 0; j < 28; j++) {
+		for (var i = 0; i < d; i++) {
+		var z=Arr[2][j]+(Arr[2][j+1]-Arr[2][j])/d*i;
+		//console.log(j*d+i);
+		Arr0[2][j*d+i]=parseInt(z);	
+		//console.log(Arr0[i]);
+		}
+	}
+
+		for (var j = 0; j < 28; j++) {
+		for (var i = 0; i < d; i++) {
+		var z=Arr[3][j]+(Arr[3][j+1]-Arr[3][j])/d*i;
+		//console.log(j*d+i);
+		Arr0[3][j*d+i]=parseInt(z);	
+		//console.log(Arr0[i]);
+		}
+	}
+
+		for (var j = 0; j < 28; j++) {
+		for (var i = 0; i < d; i++) {
+		var z=Arr[4][j]+(Arr[4][j+1]-Arr[4][j])/d*i;
+		//console.log(j*d+i);
+		Arr0[4][j*d+i]=parseInt(z);	
+		//console.log(Arr0[i]);
+		}
+	}
+	// 	console.log(Arr);
+	//console.log(Arr0);
+	for (var j = 0; j < 280; j++) {
+					for (var i = 0; i < 4; i++) {
+			for (var m = 0; m < d; m++) {
+				var z=Arr0[i][j]+(Arr0[i+1][j]-Arr0[i][j])/d*m;
+				
+				Arr00[i*d+m][j]=parseInt(z);	
+				//console.log(i*d+m);
+				//console.log(Arr00[i*d+m][j]);
+			}
+
+		}
+	}
+		fill_color();
+//console.log(Color);
+
+main();
+	}
+
+		var Arr00=[];
+		
+
+
+
+	function main(){
+// 		console.log(Arr);
+// console.log(Arr0);
+// console.log(Arr00);
+		for (var i = 0; i < d*4; i++) {
+
+			for (var j = 0; j < d*28; j++) {
+
+				var kk=Arr00[i][j];
+				kk=parseInt(kk);
+				var yyy=Color[kk-min];
+				//console.log(min);
+				//console.log(4*d);
+				//console.log(10*j,10*i);
+				draw(5*j,5*i,h,yyy);
+
+			}
+			
+		}
+	}
+
+	function trs(a,b,c){
+
+		if(a<16){
+			a=0+a.toString(16);
+		}
+		a=a.toString(16);
+		//a=a.toString()
+			if(b<16){
+			b=0+b.toString(16);
+		}
+			if(c<16){
+			c=0+c.toString(16);
+		}
+		c=c.toString(16);
+
+		//c=c.toString();
+		b=b.toString(16);
+		//b=b.toString();		
+		//console.log(a+b+c);
+		return "#"+a+b+c;
+	}
+
+	function draw(x,y,h,c){
+		ctx.fillStyle=c;
+		ctx.fillRect(x,y,h,h);
+	}
+
+
+	function fill_color(){
+		var r=0,g=255,b=0;
+		for (var i = 0; i < 255; i++) {
+			Color[i]=trs(r,g,b);
+			r++;
+			g--;
+		}
+
+	}
+	//fill_color();
+	//console.log(Color);
+	//var a=15;
+	// var Arr11=conx(Arr10);
+	// console.log(Arr11[0]);
+</script>
+</html>
