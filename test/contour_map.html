@@ -21,14 +21,11 @@
 	请输入第四组数据<input type="text" name="" id="fou" value="290,303,309,309,259,285,310,315,298,300,312,311,297,292,277,276,280,320,319,286,276,276,277,195,243,240,175,179,214"><br>
 	请输入第五组数据<input type="text" name="" id="fiv" value="278,298,309,297,281,278,307,306,305,265,291,274,313,285,261,270,259,288,292,309,301,306,282,208,276,250,110,183,239"><br>
 	<input type="submit" name="开始绘图" value="洪老师好看不？点击同意开始绘图" onclick="go()">
-	<input type="submit" name="开始绘图" value="不想表态点击这里" onclick="gg()">
 	<canvas id=myCanvas>ee</canvas>
 
 </body>
 <script type="text/javascript">
-
 	//思路是绘制一个29*5的矩阵，线性差值的方法，扩展为290*50的矩阵，然后根据每个点的数值大小上色，就这样。
-
 	var deng =document.getElementById('myCanvas');
 	var ctx=deng.getContext('2d');
 	deng.width = 2500;
@@ -41,7 +38,6 @@
 	var Arr3=new Array();
 	var Arr4=new Array();
 	var Arr5=new Array();
-
 	var Arr10=new Array();
 	var Arr20=new Array();
 	var Arr30=new Array();
@@ -54,7 +50,6 @@
 	// var Arr50=new Array(278,298,309,297,281,278,307,306,305,265,291,274,313,285,261,270,259,288,292,309,301,306,282,208,276,250,110,183,239);
 	var Arr=new Array();
 	var min=document.getElementById('min').value;
-
 	//var Arr0[0]=new Array();
 	var Arr0=[];
 	Arr0[0]=new Array();
@@ -63,9 +58,7 @@
 	Arr0[3]=new Array();
 	Arr0[4]=new Array();
 	var c;
-
 	function go(){
-
 		var fir=document.getElementById('fir').value;
 		//console.log(fir);
 		Arr10=fir.split(',').map(Number);
@@ -78,20 +71,16 @@
 		Arr40=fou.split(',').map(Number);
 		var fiv=document.getElementById('fiv').value;
 		Arr50=fiv.split(',').map(Number);
-
 	Arr[0]=Arr10;
 	Arr[1]=Arr20;
 	Arr[2]=Arr30;
 	Arr[3]=Arr40;
 	Arr[4]=Arr50;
-
 	//console.log(Arr);
-
 		for (var i = 0; i < 4*d; i++) {
 			Arr00[i]=new Array();
 		}
 	//console.log(Arr,Arr.length);
-
 	for (var j = 0; j < 28; j++) {
 		for (var i = 0; i < d; i++) {
 		var z=Arr[0][j]+(Arr[0][j+1]-Arr[0][j])/d*i;
@@ -102,7 +91,6 @@
 		}
 	}
 	//console.log(Arr0[0]);
-
 		for (var j = 0; j < 28; j++) {
 		for (var i = 0; i < d; i++) {
 		var z=Arr[1][j]+(Arr[1][j+1]-Arr[1][j])/d*i;
@@ -111,7 +99,6 @@
 		//console.log(Arr0[i]);
 		}
 	}
-
 		for (var j = 0; j < 28; j++) {
 		for (var i = 0; i < d; i++) {
 		var z=Arr[2][j]+(Arr[2][j+1]-Arr[2][j])/d*i;
@@ -120,7 +107,6 @@
 		//console.log(Arr0[i]);
 		}
 	}
-
 		for (var j = 0; j < 28; j++) {
 		for (var i = 0; i < d; i++) {
 		var z=Arr[3][j]+(Arr[3][j+1]-Arr[3][j])/d*i;
@@ -129,7 +115,6 @@
 		//console.log(Arr0[i]);
 		}
 	}
-
 		for (var j = 0; j < 28; j++) {
 		for (var i = 0; i < d; i++) {
 		var z=Arr[4][j]+(Arr[4][j+1]-Arr[4][j])/d*i;
@@ -149,28 +134,20 @@
 				//console.log(i*d+m);
 				//console.log(Arr00[i*d+m][j]);
 			}
-
 		}
 	}
 		fill_color();
 //console.log(Color);
-
 main();
 	}
-
 		var Arr00=[];
 		
-
-
-
 	function main(){
 // 		console.log(Arr);
 // console.log(Arr0);
 // console.log(Arr00);
 		for (var i = 0; i < d*4; i++) {
-
 			for (var j = 0; j < d*28; j++) {
-
 				var kk=Arr00[i][j];
 				kk=parseInt(kk);
 				var yyy=Color[kk-min];
@@ -178,14 +155,11 @@ main();
 				//console.log(4*d);
 				//console.log(10*j,10*i);
 				draw(5*j,5*i,h,yyy);
-
 			}
 			
 		}
 	}
-
 	function trs(a,b,c){
-
 		if(a<16){
 			a=0+a.toString(16);
 		}
@@ -198,20 +172,16 @@ main();
 			c=0+c.toString(16);
 		}
 		c=c.toString(16);
-
 		//c=c.toString();
 		b=b.toString(16);
 		//b=b.toString();		
 		//console.log(a+b+c);
 		return "#"+a+b+c;
 	}
-
 	function draw(x,y,h,c){
 		ctx.fillStyle=c;
 		ctx.fillRect(x,y,h,h);
 	}
-
-
 	function fill_color(){
 		var r=0,g=255,b=0;
 		for (var i = 0; i < 255; i++) {
@@ -219,16 +189,11 @@ main();
 			r++;
 			g--;
 		}
-
 	}
 	//fill_color();
 	//console.log(Color);
 	//var a=15;
 	// var Arr11=conx(Arr10);
 	// console.log(Arr11[0]);
-	funciton gg()
-	{
-	window.location.href='https://www.baidu.com/s?ie=UTF-8&wd=%E5%88%AB%E8%AF%B4%E8%B0%8E';
-	}
-	</script>
+</script>
 </html>
