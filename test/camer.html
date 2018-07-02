@@ -11,7 +11,7 @@
 <script type="text/javascript">
 	var constraints = { audio: true, video: { width: 1280, height: 720 } }; 
 
-navigator.getUserMedia(constraints)
+navigator.mediaDevices.getUserMedia(constraints)
 .then(function(mediaStream) {
   var video = document.querySelector('video');
   video.srcObject = mediaStream;
